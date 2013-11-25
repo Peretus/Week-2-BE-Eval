@@ -20,7 +20,7 @@ module Tennis
         # winner - The Integer (1 or 2) representing the winning player.
         #
         # Returns the score of the winning player. 
-        def wins_ball(player)
+        def wins_ball!(player)
             player.record_won_ball!
         end
 
@@ -54,7 +54,6 @@ module Tennis
                 end
             end
         end
-
     end
 
 
@@ -62,15 +61,15 @@ module Tennis
         attr_accessor :points, :games_won, :opponent
 
         def initialize
-          @points = 0
-          @games_won = 0
+            @points = 0
+            @games_won = 0
         end
 
         # Increments the score by 1.
         #
         # Returns the Integer new score.
         def record_won_ball!
-          @points += 1
+            @points += 1
         end
 
         #Converts from Integer points to String that
@@ -89,6 +88,5 @@ module Tennis
                     'fourty'
             end
         end
-
     end
 end

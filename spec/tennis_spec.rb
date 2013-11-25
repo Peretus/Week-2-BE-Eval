@@ -21,7 +21,7 @@ describe Tennis::Game do
 
     describe '#wins_ball' do
         it 'increments the points of the winning player' do
-            game.wins_ball(game.player1)
+            game.wins_ball!(game.player1)
             expect(game.player1.points).to eq(1)
         end
     end
@@ -43,7 +43,7 @@ describe Tennis::Game do
 
         context "When player 1 has scored 40-love" do
             it "increments player1#games_won by 1" do
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player1)}
 
                 expect(game.announce_score).to eq "Player 1 wins!"
                 expect(game.player1.games_won).to eq 1
@@ -53,7 +53,7 @@ describe Tennis::Game do
         context "When player 1 has won 6 games" do
             it "announces player 1 wins the set" do
                 5.times {game.record_game_win!(game.player1)}
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player1)}
                 game.announce_score
 
                 expect(game.announce_score).to eq "Player 1 wins the set!"
@@ -65,7 +65,7 @@ describe Tennis::Game do
         context "When player 2 has won 6 games" do
             it "announces player 2 wins the set" do
                 5.times {game.record_game_win!(game.player2)}
-                3.times {game.wins_ball(game.player2)}
+                3.times {game.wins_ball!(game.player2)}
                 game.announce_score
 
                 expect(game.announce_score).to eq "Player 2 wins the set!"
@@ -79,7 +79,7 @@ describe Tennis::Game do
                 5.times {game.record_game_win!(game.player1)}
                 5.times {game.record_game_win!(game.player2)}
 
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player1)}
                 
                 game.announce_score
 
@@ -93,7 +93,7 @@ describe Tennis::Game do
             it "announces tie game" do
                 6.times {game.record_game_win!(game.player1)}
                 5.times {game.record_game_win!(game.player2)}
-                3.times {game.wins_ball(game.player2)}
+                3.times {game.wins_ball!(game.player2)}
 
                 
                 game.announce_score
@@ -108,7 +108,7 @@ describe Tennis::Game do
             it "announces tie game" do
                 6.times {game.record_game_win!(game.player2)}
                 5.times {game.record_game_win!(game.player1)}
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player1)}
 
                 
                 game.announce_score
@@ -130,29 +130,29 @@ describe Tennis::Game do
 
         context "When points are 0 and 3" do
             it "announces player 2 wins" do
-                3.times {game.wins_ball(game.player2)}
+                3.times {game.wins_ball!(game.player2)}
                 expect(game.announce_score).to eq "Player 2 wins!"
             end
         end
 
         context "When points are 3 and 0" do
             it "announces player 1 wins" do
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player1)}
                 expect(game.announce_score).to eq "Player 1 wins!"
             end
         end
 
         context "When points are 3 and 3" do
             it "announces the score as duece" do
-                3.times {game.wins_ball(game.player2)}
-                3.times {game.wins_ball(game.player1)}
+                3.times {game.wins_ball!(game.player2)}
+                3.times {game.wins_ball!(game.player1)}
                 expect(game.announce_score).to eq "Deuce!"
             end
         end
 
         context "When points are 0 1" do
             it "announces the score as love fifteen" do
-                game.wins_ball(game.player2)
+                game.wins_ball!(game.player2)
 
                 expect(game.announce_score).to eq "The score is love fifteen!"
             end
@@ -160,7 +160,7 @@ describe Tennis::Game do
 
         context "When points are 1 0" do
             it "announces the score as fifteen love" do
-                game.wins_ball(game.player1)
+                game.wins_ball!(game.player1)
 
                 expect(game.announce_score).to eq "The score is fifteen love!"
             end
@@ -168,8 +168,8 @@ describe Tennis::Game do
 
         context "When points are 1 3" do
             it "announces the player 2 wins" do
-                game.wins_ball(game.player1)
-                3.times {game.wins_ball(game.player2)}
+                game.wins_ball!(game.player1)
+                3.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Player 2 wins!"
             end
@@ -177,8 +177,8 @@ describe Tennis::Game do
 
         context "When points are 2 3" do
             it "announces advantage player 2" do
-                2.times {game.wins_ball(game.player1)}
-                3.times {game.wins_ball(game.player2)}
+                2.times {game.wins_ball!(game.player1)}
+                3.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Advantage player 2!"
             end
@@ -186,8 +186,8 @@ describe Tennis::Game do
 
         context "When points are 2 2" do
             it "announces fourty all" do
-                2.times {game.wins_ball(game.player1)}
-                2.times {game.wins_ball(game.player2)}
+                2.times {game.wins_ball!(game.player1)}
+                2.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "The score is thirty all!"
             end
@@ -195,8 +195,8 @@ describe Tennis::Game do
 
         context "When points are 6 5" do
             it "announces advantage player 1" do
-                6.times {game.wins_ball(game.player1)}
-                5.times {game.wins_ball(game.player2)}
+                6.times {game.wins_ball!(game.player1)}
+                5.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Advantage player 1!"
             end
@@ -204,8 +204,8 @@ describe Tennis::Game do
 
         context "When points are 5 6" do
             it "announces advantage player 2" do
-                5.times {game.wins_ball(game.player1)}
-                6.times {game.wins_ball(game.player2)}
+                5.times {game.wins_ball!(game.player1)}
+                6.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Advantage player 2!"
             end
@@ -213,8 +213,8 @@ describe Tennis::Game do
 
         context "When points are 5 7" do
             it "announces player 2 wins" do
-                5.times {game.wins_ball(game.player1)}
-                7.times {game.wins_ball(game.player2)}
+                5.times {game.wins_ball!(game.player1)}
+                7.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Player 2 wins!"
             end
@@ -222,8 +222,8 @@ describe Tennis::Game do
 
         context "When points are 5 4" do
             it "announces advantage player 1" do
-                5.times {game.wins_ball(game.player1)}
-                4.times {game.wins_ball(game.player2)}
+                5.times {game.wins_ball!(game.player1)}
+                4.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Advantage player 1!"
             end
@@ -231,8 +231,8 @@ describe Tennis::Game do
 
         context "When points are 10 8" do
             it "announces player 1 wins" do
-                10.times {game.wins_ball(game.player1)}
-                8.times {game.wins_ball(game.player2)}
+                10.times {game.wins_ball!(game.player1)}
+                8.times {game.wins_ball!(game.player2)}
 
                 expect(game.announce_score).to eq "Player 1 wins!"
             end

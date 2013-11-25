@@ -75,8 +75,8 @@ module Announcer
             elsif tie?
                 announce_tiebreaker
             else
-            record_game_win!(player1)
-            "Player 1 wins!"
+                record_game_win!(player1)
+                "Player 1 wins!"
             end
         else 
             if win_set?(player2)
@@ -84,8 +84,8 @@ module Announcer
             elsif tie?
                 announce_tiebreaker
             else
-            record_game_win!(player2)
-            "Player 2 wins!"
+                record_game_win!(player2)
+                "Player 2 wins!"
             end
         end
     end
