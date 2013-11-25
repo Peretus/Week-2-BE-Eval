@@ -32,7 +32,7 @@ describe Tennis::Game do
             it "announces the score as duece" do
                 3.times {game.wins_ball(game.player2)}
                 3.times {game.wins_ball(game.player1)}
-                expect(game.announce_score).to eq "Duece!"
+                expect(game.announce_score).to eq "Deuce!"
             end
         end
 

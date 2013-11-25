@@ -44,7 +44,7 @@ module Tennis
                 elsif absolute_diff == 1
                     report_advantage
                 else
-                    "Duece!"
+                    "Deuce!"
                 end
             end
         end
@@ -65,7 +65,7 @@ module Tennis
         def record_won_ball!
           @points += 1
         end
-        
+
         #Converts from Integer points to String that
         # is used when announcing the score.
         #
