@@ -68,17 +68,6 @@ module Announcer
     #
     # Returns a String of the winning player.
 
-    def win_set?(player)
-        player.games_won >= 6 && player.opponent.games_won < 6
-    end
-
-    def announce_tiebreaker
-        "There is a tie. Starting final match game!"
-    end
-
-    def tie?
-        player1.games_won == 6 && player2.games_won == 6
-    end
     def report_win
         if @player1.points > @player2.points
             if win_set?(player1)
@@ -86,7 +75,7 @@ module Announcer
             elsif tie?
                 announce_tiebreaker
             else
-            record_game_win(player1)
+            record_game_win!(player1)
             "Player 1 wins!"
             end
         else 
@@ -95,13 +84,69 @@ module Announcer
             elsif tie?
                 announce_tiebreaker
             else
-            record_game_win(player2)
+            record_game_win!(player2)
             "Player 2 wins!"
             end
         end
     end
 
-    def record_game_win(player)
+    # Checks to see if the current play is a set-winning game.
+    #
+    # player - A variable representing player 1 or player 2. 
+    #
+    # Examples
+    #   
+    #   player1.games_won = 5
+    #   player2.games_won = 6
+    #
+    #   win_set?(player2)
+    #   => true
+    #
+    # Returns boolean.
+    def win_set?(player)
+        player.games_won >= 6 && player.opponent.games_won < 6
+    end
+
+    # Announcement that is triggered when there is a tie game.
+    #
+    # Returns a String announcing tie.
+    def announce_tiebreaker
+        "There is a tie. Starting final match game!"
+    end
+
+    # Checks to see if the current play results in a tie set.
+    #
+    #
+    # Examples
+    #   
+    #   player1.games_won = 6
+    #   player2.games_won = 6
+    #
+    #   tie?
+    #   => true
+    #
+    # Returns boolean.
+    def tie?
+        player1.games_won == 6 && player2.games_won == 6
+    end
+
+
+    # Increments the player#games_won by 1.
+    #
+    # player - A variable representing player 1 or player 2. 
+    #
+    # Examples
+    #   
+    #   player1.games_won = 0
+    #   player2.games_won = 0
+    #
+    #   record_game_win!(player2)
+    #   
+    #   player2.games_won
+    #   => 1
+    #
+    # Returns nothing
+    def record_game_win!(player)
         player.games_won+= 1
     end
 

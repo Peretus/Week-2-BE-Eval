@@ -29,14 +29,14 @@ describe Tennis::Game do
     describe "#record_game_win" do
         context "When player 1 has won 2 games" do
             it "increments player#games_won by 2" do
-                2.times {game.record_game_win(game.player1)}
+                2.times {game.record_game_win!(game.player1)}
                 expect(game.player1.games_won).to eq 2
             end
         end
 
         context "When player 2 has won 4 games" do
             it "increments player#games_won by 4" do
-                4.times {game.record_game_win(game.player2)}
+                4.times {game.record_game_win!(game.player2)}
                 expect(game.player2.games_won).to eq 4
             end
         end
@@ -52,7 +52,7 @@ describe Tennis::Game do
 
         context "When player 1 has won 6 games" do
             it "announces player 1 wins the set" do
-                5.times {game.record_game_win(game.player1)}
+                5.times {game.record_game_win!(game.player1)}
                 3.times {game.wins_ball(game.player1)}
                 game.announce_score
 
@@ -64,7 +64,7 @@ describe Tennis::Game do
 
         context "When player 2 has won 6 games" do
             it "announces player 2 wins the set" do
-                5.times {game.record_game_win(game.player2)}
+                5.times {game.record_game_win!(game.player2)}
                 3.times {game.wins_ball(game.player2)}
                 game.announce_score
 
@@ -76,8 +76,8 @@ describe Tennis::Game do
 
         context "When player 1 has won 6 games and player 2 has won 5" do
             it "announces player 1 wins the set" do
-                5.times {game.record_game_win(game.player1)}
-                5.times {game.record_game_win(game.player2)}
+                5.times {game.record_game_win!(game.player1)}
+                5.times {game.record_game_win!(game.player2)}
 
                 3.times {game.wins_ball(game.player1)}
                 
@@ -91,8 +91,8 @@ describe Tennis::Game do
 
         context "When player 1 has won 6 games and player 2 forces tie" do
             it "announces tie game" do
-                6.times {game.record_game_win(game.player1)}
-                5.times {game.record_game_win(game.player2)}
+                6.times {game.record_game_win!(game.player1)}
+                5.times {game.record_game_win!(game.player2)}
                 3.times {game.wins_ball(game.player2)}
 
                 
@@ -106,8 +106,8 @@ describe Tennis::Game do
 
         context "When player 2 has won 6 games and player 2 forces a tie" do
             it "announces tie game" do
-                6.times {game.record_game_win(game.player2)}
-                5.times {game.record_game_win(game.player1)}
+                6.times {game.record_game_win!(game.player2)}
+                5.times {game.record_game_win!(game.player1)}
                 3.times {game.wins_ball(game.player1)}
 
                 
