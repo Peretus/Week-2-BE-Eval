@@ -10,6 +10,9 @@ module Tennis
         def initialize
           @player1 = Player.new
           @player2 = Player.new
+
+          @player1.opponent = @player2
+          @player2.opponent = @player1
         end
 
         # Records a win for a ball in a game.
@@ -18,9 +21,12 @@ module Tennis
         #
         # Returns the score of the winning player. 
         def wins_ball(player)
-          player.record_won_ball!
+            player.record_won_ball!
         end
 
+        # def record_game_win(player)
+        #     player.games_won+= 1
+        # end
 
         # Announces the score of the game.
         # 
@@ -36,7 +42,7 @@ module Tennis
         # String annoucing the win, depending on the number 
         # of points for each player. 
         def announce_score
-            if both_player_points < 3
+            if players_less_than_three?
                 report_scores
             else
                 if absolute_diff >= 2
@@ -53,10 +59,11 @@ module Tennis
 
 
   class Player
-        attr_accessor :points
+        attr_accessor :points, :games_won, :opponent
 
         def initialize
           @points = 0
+          @games_won = 0
         end
 
         # Increments the score by 1.

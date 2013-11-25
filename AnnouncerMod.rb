@@ -3,8 +3,8 @@ module Announcer
     # Includes both the points for the players.
     # 
     # Returns the point values of both players.
-    def both_player_points
-        @player1.points && player2.points
+    def players_less_than_three?
+        player1.points < 3 && player2.points < 3
     end
 
     # Checks for equal scores.
@@ -67,12 +67,42 @@ module Announcer
     # Reports the scores of the winning player.
     #
     # Returns a String of the winning player.
+
+    def win_set?(player)
+        player.games_won >= 6 && player.opponent.games_won < 6
+    end
+
+    def announce_tiebreaker
+        "There is a tie. Starting final match game!"
+    end
+
+    def tie?
+        player1.games_won == 6 && player2.games_won == 6
+    end
     def report_win
         if @player1.points > @player2.points
+            if win_set?(player1)
+                "Player 1 wins the set!"
+            elsif tie?
+                announce_tiebreaker
+            else
+            record_game_win(player1)
             "Player 1 wins!"
+            end
         else 
+            if win_set?(player2)
+                "Player 2 wins the set!"
+            elsif tie?
+                announce_tiebreaker
+            else
+            record_game_win(player2)
             "Player 2 wins!"
+            end
         end
+    end
+
+    def record_game_win(player)
+        player.games_won+= 1
     end
 
     # Reports the player with the advantage.
